@@ -7,11 +7,13 @@ funcs = ['perimeter', 'area']
 sizes = {}
 
 def calc(fig, func, size):
-	assert fig in figs
-	assert func in funcs
-
-	result = eval(f'{fig}.{func}(*{size})')
-	print(f'{func} of {fig} is {result}')
+    assert fig in figs, f"Invalid figure: {fig}"
+    assert func in funcs, f"Invalid function: {func}"
+    try:
+        result = eval(f'{fig}.{func}(*{size})')
+        return result
+    except Exception as e:
+        raise ValueError(f"Error calculating {func} for {fig} with size {size}: {e}")
 
 if __name__ == "__main__":
 	func = ''
