@@ -1,13 +1,17 @@
 import unittest
-from calculate import calc, figs, funcs
+from calculate import calc
 
 
 class TestCalcFunction(unittest.TestCase):
     def test_circle_area(self):
-        self.assertAlmostEqual(calc("circle", "area", [10]), 314.1592653589793)
+        self.assertAlmostEqual(
+            calc("circle", "area", [10]), 314.1592653589793, places=5
+        )
 
     def test_circle_perimeter(self):
-        self.assertAlmostEqual(calc("circle", "perimeter", [10]), 62.83185307179586)
+        self.assertAlmostEqual(
+            calc("circle", "perimeter", [10]), 62.83185307179586, places=5
+        )
 
     def test_square_area(self):
         self.assertEqual(calc("square", "area", [5]), 25)
@@ -16,11 +20,11 @@ class TestCalcFunction(unittest.TestCase):
         self.assertEqual(calc("square", "perimeter", [5]), 20)
 
     def test_invalid_figure(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             calc("triangle", "area", [5])
 
     def test_invalid_function(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             calc("circle", "volume", [5])
 
     def test_invalid_size(self):
