@@ -36,7 +36,9 @@ def calc(fig, func, size):
         method = getattr(cls, func)
         return method(*size)
     except Exception as e:
-        raise ValueError(f"Error calculating {func} for {fig} with size {size}: {e}")
+        raise ValueError(
+            f"Error calculating {func} for {fig} with size {size}: {e}"
+        )
 
 
 if __name__ == "__main__":
@@ -45,10 +47,14 @@ if __name__ == "__main__":
     size = []
 
     while fig not in figs:
-        fig = input(f"Enter figure name, available options are {figs}: ").strip()
+        fig = input(
+            f"Enter figure name, available options are {figs}: "
+        ).strip()
 
     while func not in funcs:
-        func = input(f"Enter function name, available options are {funcs}: ").strip()
+        func = input(
+            f"Enter function name, available options are {funcs}: "
+        ).strip()
 
     expected_size_count = sizes.get(fig, 1)
     while len(size) != expected_size_count:
@@ -57,7 +63,8 @@ if __name__ == "__main__":
                 map(
                     float,
                     input(
-                        f"Input figure sizes separated by space ({expected_size_count} values expected): "
+                        f"Input figure sizes separated by space "
+                        f"({expected_size_count} values expected): "
                     ).split(),
                 )
             )
@@ -66,6 +73,8 @@ if __name__ == "__main__":
 
     try:
         result = calc(fig, func, size)
-        print(f"The {func} of the {fig} with size {size} is {result:.2f}.")
+        print(
+            f"The {func} of the {fig} with size {size} is {result:.2f}."
+        )
     except ValueError as e:
         print(e)
