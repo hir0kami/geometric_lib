@@ -1,41 +1,22 @@
-import math
+import unittest
+from circle import Circle
 
 
-class Circle:
-    def __init__(self, radius):
-        if radius <= 0:
-            raise ValueError("Radius must be a positive number.")
-        self.radius = radius
+class TestCircle(unittest.TestCase):
+    def test_area(self):
+        circle = Circle(5)
+        self.assertAlmostEqual(circle.area(), 78.53981633974483, places=5)
 
-    def area(self):
-        return math.pi * self.radius**2
+    def test_perimeter(self):
+        circle = Circle(5)
+        self.assertAlmostEqual(circle.perimeter(), 31.41592653589793, places=5)
 
-    def perimeter(self):
-        return 2 * math.pi * self.radius
+    def test_invalid_radius(self):
+        with self.assertRaises(ValueError):
+            Circle(-5)
+        with self.assertRaises(ValueError):
+            Circle(0)
 
-    def __repr__(self):
-        return f"Circle(radius={self.radius})"
-
-
-class Square:
-    def __init__(self, side_length):
-        if side_length <= 0:
-            raise ValueError("Side length must be a positive number.")
-        self.side_length = side_length
-
-    def area(self):
-        return self.side_length**2
-
-    def perimeter(self):
-        return 4 * self.side_length
-
-    def __repr__(self):
-        return f"Square(side_length={self.side_length})"
-
-
-figs = ["circle", "square"]
-funcs = ["perimeter", "area"]
-sizes = {}
 
 if __name__ == "__main__":
-    print("Shapes and their functionalities are ready to use!")
+    unittest.main()
