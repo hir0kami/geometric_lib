@@ -74,7 +74,7 @@ if __name__ == "__main__":
     try:
         result = calc(fig, func, size)
         print(
-            f"The {func} of the {fig} with size {size} is {result:.2f}."
+            f"The {func} of the {fig} with size {size} is {result: .2f}."
         )
     except ValueError as e:
         print(e)
