@@ -1,6 +1,6 @@
-triangle_test
 import unittest
 from triangle import area, perimeter
+
 
 class TriangleTestCase(unittest.TestCase):
     def test_negative_sides(self):
@@ -34,7 +34,6 @@ class TriangleTestCase(unittest.TestCase):
         self.assertEqual(perimeter(a, b, c), expected_perimeter)
 
     def test_large_triangle(self):
-        """Тест для треугольника с большими сторонами."""
         a, b, c = 1e6, 1e6, 1e6
         s = (a + b + c) / 2
         expected_area = math.sqrt(s * (s - a) * (s - b) * (s - c))
@@ -42,6 +41,7 @@ class TriangleTestCase(unittest.TestCase):
 
         self.assertAlmostEqual(area(a, b, c), expected_area, places=7)
         self.assertEqual(perimeter(a, b, c), expected_perimeter)
+
 
 if __name__ == "__main__":
     unittest.main()
