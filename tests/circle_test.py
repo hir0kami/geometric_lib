@@ -1,21 +1,36 @@
 import unittest
-from circle_lib import Circle
+import math
+from circle import area, perimeter
 
 
-class TestCircle(unittest.TestCase):
-    def test_area(self):
-        circle = Circle(5)
-        self.assertAlmostEqual(circle.area(), 78.53981633974483, places=5)
+class CircleTestCase(unittest.TestCase):
+    def test_zero_radius(self):
+        radius = 0
+        expected_area = 0
+        expected_perimeter = 0
+        self.assertEqual(area(radius), expected_area)
+        self.assertEqual(perimeter(radius), expected_perimeter)
 
-    def test_perimeter(self):
-        circle = Circle(5)
-        self.assertAlmostEqual(circle.perimeter(), 31.41592653589793, places=5)
+    def test_positive_radius(self):
+        radius = 1
+        expected_area = math.pi
+        expected_perimeter = 2 * math.pi
+        self.assertEqual(area(radius), expected_area)
+        self.assertEqual(perimeter(radius), expected_perimeter)
 
-    def test_invalid_radius(self):
+    def test_negative_radius(self):
+        radius = -1
         with self.assertRaises(ValueError):
-            Circle(-5)
+            area(radius)
         with self.assertRaises(ValueError):
-            Circle(0)
+            perimeter(radius)
+
+    def test_non_numeric_radius(self):
+        radius = "string"
+        with self.assertRaises(TypeError):
+            area(radius)
+        with self.assertRaises(TypeError):
+            perimeter(radius)
 
 
 if __name__ == "__main__":
