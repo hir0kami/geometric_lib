@@ -5,6 +5,7 @@ funcs = ["perimeter", "area"]
 
 sizes = {"circle": 1, "square": 1}
 
+
 def calc(fig, func, size):
     if fig not in figs:
         raise ValueError(f"Invalid figure: {fig}")
@@ -13,7 +14,11 @@ def calc(fig, func, size):
 
     try:
         if fig == "circle":
-            expression = f"2 * math.pi * {size[0]}" if func == "perimeter" else f"math.pi * {size[0]}**2"
+            expression = (
+                f"2 * math.pi * {size[0]}"
+                if func == "perimeter"
+                else f"math.pi * {size[0]}**2"
+            )
         elif fig == "square":
             expression = f"4 * {size[0]}" if func == "perimeter" else f"{size[0]}**2"
         result = eval(expression)  # Использование eval для вычисления
@@ -21,20 +26,17 @@ def calc(fig, func, size):
     except Exception as e:
         raise ValueError(f"Error calculating {func} for {fig} with size {size}: {e}")
 
+
 if __name__ == "__main__":
     func = ""
     fig = ""
     size = []
 
     while fig not in figs:
-        fig = input(
-            f"Enter figure name, available options are {figs}: "
-        ).strip()
+        fig = input(f"Enter figure name, available options are {figs}: ").strip()
 
     while func not in funcs:
-        func = input(
-            f"Enter function name, available options are {funcs}: "
-        ).strip()
+        func = input(f"Enter function name, available options are {funcs}: ").strip()
 
     expected_size_count = sizes.get(fig, 1)
     while len(size) != expected_size_count:
@@ -53,8 +55,6 @@ if __name__ == "__main__":
 
     try:
         result = calc(fig, func, size)
-        print(
-            f"The {func} of the {fig} with size {size} is {result: .2f}."
-        )
+        print(f"The {func} of the {fig} with size {size} is {result: .2f}.")
     except ValueError as e:
         print(e)
