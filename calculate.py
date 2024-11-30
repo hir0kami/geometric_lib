@@ -20,7 +20,8 @@ def calc(fig, func, size):
                 else f"math.pi * {size[0]}**2"
             )
         elif fig == "square":
-            expression = f"4 * {size[0]}" if func == "perimeter" 
+            expression = f"4 * {size[0]}" 
+            if func == "perimeter" 
             else f"{size[0]}**2"
         result = eval(expression)
         return result
