@@ -1,45 +1,25 @@
 import math
 
-
-class Circle:
-    @staticmethod
-    def perimeter(radius):
-        return 2 * math.pi * radius
-
-    @staticmethod
-    def area(radius):
-        return math.pi * radius**2
-
-
-class Square:
-    @staticmethod
-    def perimeter(side_length):
-        return 4 * side_length
-
-    @staticmethod
-    def area(side_length):
-        return side_length**2
-
-
 figs = ["circle", "square"]
 funcs = ["perimeter", "area"]
-sizes = {"circle": 1, "square": 1}
 
+sizes = {"circle": 1, "square": 1}
 
 def calc(fig, func, size):
     if fig not in figs:
         raise ValueError(f"Invalid figure: {fig}")
     if func not in funcs:
         raise ValueError(f"Invalid function: {func}")
-    try:
-        cls = Circle if fig == "circle" else Square
-        method = getattr(cls, func)
-        return method(*size)
-    except Exception as e:
-        raise ValueError(
-            f"Error calculating {func} for {fig} with size {size}: {e}"
-        )
 
+    try:
+        if fig == "circle":
+            expression = f"2 * math.pi * {size[0]}" if func == "perimeter" else f"math.pi * {size[0]}**2"
+        elif fig == "square":
+            expression = f"4 * {size[0]}" if func == "perimeter" else f"{size[0]}**2"
+        result = eval(expression)  # Использование eval для вычисления
+        return result
+    except Exception as e:
+        raise ValueError(f"Error calculating {func} for {fig} with size {size}: {e}")
 
 if __name__ == "__main__":
     func = ""
