@@ -12,7 +12,9 @@ def calc(fig, func, size):
     if func not in funcs:
         raise ValueError(f"Invalid function: {func}")
     if not isinstance(size, list) or not all(isinstance(x, (int, float)) for x in size):
-        raise ValueError(f"Invalid size format: {size}. Must be a list of numbers.")
+        raise ValueError(
+            f"Invalid size format: {size}. Must be a list of numbers."
+        )
     if len(size) != sizes.get(fig, 1):
         raise ValueError(
             f"Invalid size count for {fig}: {size}. "
@@ -36,7 +38,6 @@ def calc(fig, func, size):
         raise ValueError(
             f"Error calculating {func} for {fig} with size {size}: {e}"
         )
-
 
 
 if __name__ == "__main__":
