@@ -1,35 +1,81 @@
-import circle
-import square
+import math
 
+figs = ["circle", "square"]
+funcs = ["perimeter", "area"]
 
-figs = ['circle', 'square']
-funcs = ['perimeter', 'area']
-sizes = {}
+sizes = {"circle": 1, "square": 1}
+
 
 def calc(fig, func, size):
-    assert fig in figs, f"Invalid figure: {fig}"
-    assert func in funcs, f"Invalid function: {func}"
+    if fig not in figs:
+        raise ValueError(f"Invalid figure: {fig}")
+    if func not in funcs:
+        raise ValueError(f"Invalid function: {func}")
+    if not isinstance(size, list) or not all(
+        isinstance(x, (int, float)) for x in size
+    ):
+        raise ValueError(
+            f"Invalid size format: {size}. Must be a list of numbers."
+        )
+    if len(size) != sizes.get(fig, 1):
+        raise ValueError(
+            f"Invalid size count for {fig}: {size}. "
+            f"Expected {sizes.get(fig, 1)} value(s)."
+        )
+
     try:
-        result = eval(f'{fig}.{func}(*{size})')
+        if fig == "circle":
+            expression = (
+                f"2 * math.pi * {size[0]}"
+                if func == "perimeter"
+                else f"math.pi * {size[0]}**2"
+            )
+        elif fig == "square":
+            expression = (
+                f"4 * {size[0]}" if func == "perimeter" else f"{size[0]}**2"
+            )
+        result = eval(expression, {"math": math})
         return result
     except Exception as e:
-        raise ValueError(f"Error calculating {func} for {fig} with size {size}: {e}")
+        raise ValueError(
+            f"Error calculating {func} for {fig} with size {size}: {e}"
+        )
+
 
 if __name__ == "__main__":
-	func = ''
-	fig = ''
-	size = list()
-    
-	while fig not in figs:
-		fig = input(f"Enter figure name, avaliable are {figs}:\n")
-	
-	while func not in funcs:
-		func = input(f"Enter function name, avaliable are {funcs}:\n")
-	
-	while len(size) != sizes.get(f"{func}-{fig}", 1):
-		size = list(map(int, input("Input figure sizes separated by space, 1 for circle and square\n").split(' ')))
-	
-	calc(fig, func, size)
+    func = ""
+    fig = ""
+    size = []
 
+    while fig not in figs:
+        fig = input(
+            f"Enter figure name, available options are {figs}: "
+        ).strip()
 
+    while func not in funcs:
+        func = input(
+            f"Enter function name, available options are {funcs}: "
+        ).strip()
 
+    expected_size_count = sizes.get(fig, 1)
+    while len(size) != expected_size_count:
+        try:
+            size = list(
+                map(
+                    float,
+                    input(
+                        f"Input figure sizes separated by space "
+                        f"({expected_size_count} values expected): "
+                    ).split(),
+                )
+            )
+        except ValueError:
+            print("Invalid input. Please enter numeric values.")
+
+    try:
+        result = calc(fig, func, size)
+        print(
+            f"The {func} of the {fig} with size {size} is {result: .2f}."
+        )
+    except ValueError as e:
+        print(e)
