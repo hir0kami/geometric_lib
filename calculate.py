@@ -1,3 +1,5 @@
+import math
+
 figs = ["circle", "square"]
 funcs = ["perimeter", "area"]
 
@@ -21,7 +23,7 @@ def calc(fig, func, size):
             expression = (
                 f"4 * {size[0]}" if func == "perimeter" else f"{size[0]}**2"
             )
-        result = eval(expression)
+        result = eval(expression, {"math": math})
         return result
     except Exception as e:
         raise ValueError(
