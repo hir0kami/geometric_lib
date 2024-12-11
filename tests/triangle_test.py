@@ -31,10 +31,13 @@ class TriangleTestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             perimeter(a, b, c)
 
-    def test_non_numeric_sides(self):
+    def test_non_numeric_sides_area(self):
         a, b, c = "string", 4, 5
         with self.assertRaises(TypeError):
             area(a, b, c)
+
+    def test_non_numeric_sides_perimeter(self):
+        a, b, c = "string", 4, 5
         with self.assertRaises(TypeError):
             perimeter(a, b, c)
 
