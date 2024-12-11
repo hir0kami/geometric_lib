@@ -11,7 +11,10 @@ def calc(fig, func, size):
         raise ValueError(f"Invalid figure: {fig}")
     if func not in funcs:
         raise ValueError(f"Invalid function: {func}")
-    if not isinstance(size, list) or not all(isinstance(x, (int, float)) for x in size):
+    if (
+    not isinstance(size, list)
+    or not all(isinstance(x, (int, float)) for x in size)
+    ):
         raise ValueError(
             f"Invalid size format: {size}. Must be a list of numbers."
         )
