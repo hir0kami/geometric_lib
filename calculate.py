@@ -1,5 +1,3 @@
-import math
-
 figs = ["circle", "square"]
 funcs = ["perimeter", "area"]
 
