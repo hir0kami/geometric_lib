@@ -1,5 +1,3 @@
-import math
-
 figs = ["circle", "square"]
 funcs = ["perimeter", "area"]
 
@@ -24,7 +22,8 @@ def calc(fig, func, size):
         result = eval(expression)
         return result
     except Exception as e:
-        raise ValueError(f"Error calculating {func} for {fig} with size {size}: {e}")
+        raise ValueError(f"Error calculating {func} 
+        for {fig} with size {size}: {e}")
 
 
 if __name__ == "__main__":
@@ -33,10 +32,12 @@ if __name__ == "__main__":
     size = []
 
     while fig not in figs:
-        fig = input(f"Enter figure name, available options are {figs}: ").strip()
+        fig = input(f"Enter figure name, 
+        available options are {figs}: ").strip()
 
     while func not in funcs:
-        func = input(f"Enter function name, available options are {funcs}: ").strip()
+        func = input(f"Enter function name, 
+        available options are {funcs}: ").strip()
 
     expected_size_count = sizes.get(fig, 1)
     while len(size) != expected_size_count:
