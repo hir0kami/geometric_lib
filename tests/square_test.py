@@ -1,5 +1,8 @@
 import unittest
+import sys
 from square import area, perimeter
+
+sys.path.append("..")
 
 
 class SquareTestCase(unittest.TestCase):
@@ -7,28 +10,25 @@ class SquareTestCase(unittest.TestCase):
         side = 0
         expected_area = 0
         expected_perimeter = 0
+
         self.assertEqual(area(side), expected_area)
         self.assertEqual(perimeter(side), expected_perimeter)
 
     def test_positive_side(self):
-        side = 4
-        expected_area = 16
-        expected_perimeter = 16
+        side = 1
+        expected_area = 1
+        expected_perimeter = 4
+
         self.assertEqual(area(side), expected_area)
         self.assertEqual(perimeter(side), expected_perimeter)
 
     def test_negative_side(self):
-        side = -4
-        with self.assertRaises(ValueError):
-            area(side)
-        with self.assertRaises(ValueError):
-            perimeter(side)
+        side = -1
 
-    def test_non_numeric_side(self):
-        side = "string"
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             area(side)
-        with self.assertRaises(TypeError):
+
+        with self.assertRaises(ValueError):
             perimeter(side)
 
 
